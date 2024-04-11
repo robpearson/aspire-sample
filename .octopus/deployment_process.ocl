@@ -1,5 +1,5 @@
 step "deploy-asire-sample-aspir8-kustomize-output" {
-    name = "Deploy Asire Sample Aspir8 Kustomize output"
+    name = "Deploy Aspire Sample Aspir8 Kustomize output"
     properties = {
         Octopus.Action.TargetRoles = "aspire"
     }
@@ -9,7 +9,7 @@ step "deploy-asire-sample-aspir8-kustomize-output" {
         properties = {
             Octopus.Action.GitRepository.Source = "Project"
             Octopus.Action.Kubernetes.DeploymentTimeout = "180"
-            Octopus.Action.Kubernetes.Kustomize.OverlayPath = "/aspire-sample.AppHost/aspirate-output"
+            Octopus.Action.Kubernetes.Kustomize.OverlayPath = "aspire-sample.AppHost/aspirate-output/"
             Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
             Octopus.Action.Script.ScriptSource = "GitRepository"
             OctopusUseBundledTooling = "False"
