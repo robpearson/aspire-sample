@@ -1,12 +1,17 @@
-step "hello-world" {
-    name = "Hello world!"
+step "deploy-asire-sample-aspir8-kustomize-output" {
+    name = "Deploy Asire Sample Aspir8 Kustomize output"
+    properties = {
+        Octopus.Action.TargetRoles = "aspire"
+    }
 
     action {
-        action_type = "Octopus.Script"
+        action_type = "Octopus.Kubernetes.Kustomize"
         properties = {
-            Octopus.Action.Script.ScriptBody = "Write-Host \"Hello world!\""
-            Octopus.Action.Script.ScriptSource = "Inline"
-            Octopus.Action.Script.Syntax = "PowerShell"
+            Octopus.Action.GitRepository.Source = "Project"
+            Octopus.Action.Kubernetes.DeploymentTimeout = "180"
+            Octopus.Action.Kubernetes.Kustomize.OverlayPath = "/aspire-sample.AppHost/aspirate-output"
+            Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
+            Octopus.Action.Script.ScriptSource = "GitRepository"
             OctopusUseBundledTooling = "False"
         }
         worker_pool = "hosted-ubuntu"
