@@ -13,7 +13,7 @@ step "create-load-balancer" {
                 apiVersion: v1
                 kind: Service
                 metadata:
-                  name: 'WeatherAppService'
+                  name: 'webfrontend-webapp'
                   namespace: 'default'
                 spec:
                   type: LoadBalancer
