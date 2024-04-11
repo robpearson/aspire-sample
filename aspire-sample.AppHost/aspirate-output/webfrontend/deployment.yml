@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: webfrontend
-        image: webfrontend:latest
+        image: cloudaspirations.azurecr.io/webfrontend:1.16.3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -26,6 +26,4 @@ spec:
         envFrom:
         - configMapRef:
             name: webfrontend-env
-        - secretRef:
-            name: webfrontend-secrets
       terminationGracePeriodSeconds: 180

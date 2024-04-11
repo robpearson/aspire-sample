@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: apiservice
-        image: apiservice:latest
+        image: cloudaspirations.azurecr.io/apiservice:1.16.3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
