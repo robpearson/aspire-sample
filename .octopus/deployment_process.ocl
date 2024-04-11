@@ -1,3 +1,44 @@
+step "create-load-balancer" {
+    name = "Create Load balancer"
+    properties = {
+        Octopus.Action.TargetRoles = "aspire"
+    }
+
+    action {
+        action_type = "Octopus.KubernetesDeployRawYaml"
+        properties = {
+            Octopus.Action.Kubernetes.DeploymentTimeout = "180"
+            Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
+            Octopus.Action.KubernetesContainers.CustomResourceYaml = <<-EOT
+                apiVersion: v1
+                kind: Service
+                metadata:
+                  name: 'WeatherAppService'
+                  namespace: 'default'
+                spec:
+                  type: LoadBalancer
+                  ports:
+                    - name: http
+                      port: 8080
+                      targetPort: 8080
+                      protocol: TCP
+                  selector:
+                    component: web
+                    type: main
+                
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool = "hosted-windows"
+
+        container {
+            feed = "dockerhub"
+            image = "octopusdeploy/worker-tools:6.2.1-ubuntu.22.04"
+        }
+    }
+}
+
 step "deploy-asire-sample-aspir8-kustomize-output" {
     name = "Deploy Aspire Sample Aspir8 Kustomize output"
     properties = {
