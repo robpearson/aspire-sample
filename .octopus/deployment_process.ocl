@@ -1,3 +1,17 @@
+step "production-approval" {
+    name = "Production approval"
+
+    action {
+        action_type = "Octopus.Manual"
+        environments = ["production"]
+        properties = {
+            Octopus.Action.Manual.BlockConcurrentDeployments = "False"
+            Octopus.Action.Manual.Instructions = "Does this change have all tasks approved? Check the change request."
+            Octopus.Action.Manual.ResponsibleTeamIds = "global/everyone"
+        }
+    }
+}
+
 step "create-load-balancer" {
     name = "Create Load balancer"
     properties = {
