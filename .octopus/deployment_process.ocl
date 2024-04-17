@@ -17,15 +17,13 @@ step "update-database" {
     name = "Update database"
 
     action {
-        action_type = "Octopus.AzurePowerShell"
+        action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Azure.AccountId = "azure-dev-playground"
-            Octopus.Action.Script.ScriptBody = "Write-Host \"Updating database ...\""
+            Octopus.Action.Script.ScriptBody = "Write-Host \"Hello world!\""
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
-            OctopusUseBundledTooling = "False"
         }
-        worker_pool = "hosted-ubuntu"
+        worker_pool = "hosted-windows"
     }
 }
 
@@ -59,6 +57,7 @@ step "deploy-legacy-service" {
             Octopus.Action.Package.DownloadOnTentacle = "False"
             Octopus.Action.Package.FeedId = "octopus-server-built-in"
             Octopus.Action.Package.PackageId = "Northwind365"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
 
