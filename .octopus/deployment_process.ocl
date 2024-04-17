@@ -23,7 +23,7 @@ step "update-database" {
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
         }
-        worker_pool = "hosted-windows"
+        worker_pool = "hosted-ubuntu"
     }
 }
 
