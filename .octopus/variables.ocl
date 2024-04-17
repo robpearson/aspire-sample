@@ -1,3 +1,15 @@
 variable "Slack.Notification.Channel" {
     value "#production-notifications" {}
 }
+
+variable "Azure.Account" {
+    type = "AzureAccount"
+
+    value "azure-dev-playground" {
+        environment = ["development", "staging"]
+    }
+
+    value "azure-production-subscription" {
+        environment = ["production"]
+    }
+}
