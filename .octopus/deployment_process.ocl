@@ -139,6 +139,28 @@ step "deploy-asire-sample-aspir8-kustomize-output" {
             feed = "dockerhub"
             image = "octopusdeploy/worker-tools:6.2.1-ubuntu.22.04"
         }
+
+        packages "webfrontend" {
+            acquisition_location = "NotAcquired"
+            feed = "cloud-aspirations"
+            package_id = "webfrontend"
+            properties = {
+                Extract = "False"
+                Purpose = "DockerImageReference"
+                SelectionMode = "immediate"
+            }
+        }
+
+        packages "apiservice" {
+            acquisition_location = "NotAcquired"
+            feed = "cloud-aspirations"
+            package_id = "apiservice"
+            properties = {
+                Extract = "False"
+                Purpose = "DockerImageReference"
+                SelectionMode = "immediate"
+            }
+        }
     }
 }
 
