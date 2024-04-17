@@ -13,3 +13,55 @@ variable "Azure.Account" {
         environment = ["production"]
     }
 }
+
+variable "Azure.Database.ConnectionString" {
+    value "Server=#{Azure.Database.Server};Initial Catalog=#{Azure.Database.Name};Persist Security Info=False;User ID=#{Azure.Database.User};Password=#{Azure.Database.UserPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" {}
+}
+
+variable "ConnectionStrings:EcommDatabase" {
+    value "#{Azure.Database.ConnectionString}" {}
+}
+
+variable "Azure.Storage.ContainerName" {
+    value "rp-cloudaspirations-container" {}
+}
+
+variable "Azure.Storage.AccountName" {
+    value "rp-cloudaspirationsstorage" {}
+}
+
+variable "Azure.ResourceGroupName" {
+    value "rg-cloudaspirations" {}
+}
+
+variable "Azure.Region" {
+    value "australiaeast" {}
+}
+
+variable "Azure.Database.User" {
+    value "dev-test-northwind-appservice-server-admin" {
+        environment = ["development", "staging"]
+    }
+
+    value "au-northwind-appservice-server-admin" {
+        environment = ["production"]
+    }
+}
+
+variable "Azure.Database.Server" {
+    value "tcp:au-ecomm-appservice-server.database.windows.net,1433;" {}
+}
+
+variable "Azure.Database.Name" {
+    value "dev-ecomm-database" {
+        environment = ["development"]
+    }
+
+    value "test-ecomm-database" {
+        environment = ["staging"]
+    }
+
+    value "prod-ecomm-database" {
+        environment = ["production"]
+    }
+}
